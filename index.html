@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAfxJREFUSEvt1s3LTVEUx/HPk7wkbynKwEDeUhJFCjESA1Fe/gGijCgjIpQnEylTSjExEIWJgZD3EsIAGSgTpCTCQOKs2reu0z337NO9uRNndM4+a/2+e6299tp7yICeoQFxNQXPwhaMLk34By7idW4gTcALcAsTK8Q/YQVe5MBzwfNwB5NrRD9ieU7kOeDZuIspOZHgXYK/6WZfBi/ELsxoc4pop2ZCW2Yf8LLNJyZxHM9bY+3gOXiKMQ0huebfEUG8DYd28B4cy1XBq2Q7t4HPbpwogw/hYI3IQwzjOr4m2/FFDazGAcRSdXsOFz+D81fEdeCzRZq2FoBfFcqjcA4bu5Abg59gKX4m0e1Ym96v4lR6H1uAn2FmBbwxeCVuJ7FLWF8SvowNaWwzzvcD/B7T2iI9WSG6I0Ueu+JLUQsjO9g1ivheagihc6HLGkav3pRgsV/n9wp+hMVJJBf8GIt6BUfaJhVb7TeiqOpSPQKfi54wrldw+Mc+vZZZXOtwpR/FFRrRSpdkbKc4p8O2qps1Kq7W5M9g279uIC34g9Qyb+BbGpyANdhf3EListD3llkWjJtGtMmqLtVpAh1TvS9FUzPpnn4H42gotB+Lq3CzJ9l652XFstwvg+N7J/Zier1GI4u4gRzB6ZZXzp2rESHX+D84N1M92w0s1X8AYwlqH89rFFwAAAAASUVORK5CYII="/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body, html{
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+        }
+        video{
+            width: 100%;
+            height: 100%;
+            transform: scale(-1, 1);
+        }
+    </style>
+</head>
+<body>
+    <video id="cameraFeed" src="" autoplay></video>
+    <script>
+        const cameraFeed = document.getElementById("cameraFeed");
+        // const video = document.createElement("video");
+        // const constraints = {
+        //     video: {
+        //         width: {min: 640},
+        //         height: {min: 480}
+        //     }
+        // };
+        navigator.mediaDevices.getUserMedia({video: true})
+        .then(stream => {
+            cameraFeed.srcObject = stream;
+            cameraFeed.play();
+            cameraFeed.addEventListener("loadedmetadata", e => {
+                cameraFeed.width = video.videoWidth;
+                cameraFeed.height = video.videoHeight;
+            })
+        })
+        .catch(err => {
+            console.log("Error accsessing camera: " + err);
+        });
+    </script>
+</body>
+</html>
